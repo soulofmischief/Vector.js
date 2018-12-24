@@ -1,0 +1,29 @@
+{
+  "presets": [
+    "@babel/env",
+    "@babel/flow"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-nullish-coalescing-operator"
+  ],
+
+
+  "env": {
+    "commonjs": {
+      "presets": [
+        ["@babel/env", {
+          "useBuiltIns": false
+        }]
+      ]
+    },
+
+    "es": {
+      "presets": [
+        ["@babel/env", {
+          "useBuiltIns": false,
+          "modules": false
+        }]
+      ]
+    }
+  }
+}
