@@ -2,6 +2,8 @@
 /**
  * Vector.js
  *
+ * A small 3D Vector class written in ES6+Flow
+ *
  * Based on original implementation by Evan Wallace
  * @see https://evanw.github.io/lightgl.js/docs/vector.html
  * @see https://github.com/evanw
