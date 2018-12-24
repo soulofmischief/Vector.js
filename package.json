@@ -1,7 +1,7 @@
 {
   "name": "@soulofmischief/vector.js",
   "description": "A small 3D Vector class written in ES6+Flow",
-  "version": "1.0.1",
+  "version": "1.1.2",
   "author": {
     "name": "soulofmischief",
     "email": "soulofmischief@protonmail.com",
@@ -24,8 +24,8 @@
     "build": "npm run clean; for script in {commonjs,es,umd,umd:min}; do npm run build:$script; done",
     "build:commonjs": "BABEL_ENV=commonjs npx babel src --out-dir lib",
     "build:es": "BABEL_ENV=es npx babel src --out-dir es",
-    "build:umd": "BABEL_ENV=es NODE_ENV=development npx rollup src/index.js --config --sourcemap --file dist/ast-ast.js",
-    "build:umd:min": "BABEL_ENV=es NODE_ENV=production npx rollup src/index.js --config --file dist/ast-ast.min.js",
+    "build:umd": "BABEL_ENV=es NODE_ENV=development npx rollup src/index.js --config --sourcemap --file dist/vector.js",
+    "build:umd:min": "BABEL_ENV=es NODE_ENV=production npx rollup src/index.js --config --file dist/vector.min.js",
     "clean": "npx rimraf es dist lib",
     "lint:flow": "npx flow status",
     "lint:flow:stop": "npx flow stop",

@@ -7,7 +7,7 @@ import { uglify } from 'rollup-plugin-uglify';
 const config = {
   output: {
     format: 'umd',
-    name: 'AST-AST',
+    name: 'Vector.js',
   },
   plugins: [
     nodeResolve( {
