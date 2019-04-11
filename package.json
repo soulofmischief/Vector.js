@@ -15,8 +15,8 @@
   "jsnext:main": "es/index.js",
   "files": [
     "dist",
-    "lib",
     "es",
+    "lib",
     "src"
   ],
   "repository": {},
