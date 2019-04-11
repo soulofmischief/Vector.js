@@ -21,12 +21,12 @@ export class Vector {
     this.z = z || 0
   }
 
-  static negative( a: Vector, b: Vector ) {
+  static negative( a: Vector, b: Vector = new Vector(0,0,0 )) {
     b.x = -a.x; b.y = -a.y; b.z = -a.z
     return b
   }
 
-  static add( a: Vector, b: Vector, c: Vector ) {
+  static add( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x + b.x
       c.y = a.y + b.y
@@ -40,7 +40,7 @@ export class Vector {
     return c
   }
 
-  static subtract( a: Vector, b: Vector, c: Vector ) {
+  static subtract( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x - b.x
       c.y = a.y - b.y
@@ -54,7 +54,7 @@ export class Vector {
     return c
   }
 
-  static multiply( a: Vector, b: Vector | number, c: Vector ) {
+  static multiply( a: Vector, b: Vector | number, c: Vector = new Vector(0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x * b.x
       c.y = a.y * b.y
@@ -68,7 +68,7 @@ export class Vector {
     return c
   }
 
-  static divide( a: Vector, b: Vector, c: Vector ) {
+  static divide( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x / b.x
       c.y = a.y / b.y
@@ -82,14 +82,14 @@ export class Vector {
     return c
   }
 
-  static cross( a: Vector, b: Vector, c: Vector ) {
+  static cross( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
     c.x = a.y * b.z - a.z * b.y
     c.y = a.z * b.x - a.x * b.z
     c.z = a.x * b.y - a.y * b.x
     return c
   }
 
-  static unit( a: Vector, b: Vector ) {
+  static unit( a: Vector, b: Vector = new Vector(0,0,0 )) {
     const length = a.length()
     b.x = a.x / length
     b.y = a.y / length
