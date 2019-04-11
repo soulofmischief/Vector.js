@@ -89,7 +89,6 @@ export class Vector {
     return c
   }
 
-  /** Returns a unit vector pointing in the direction of another vector. */
   static unit( a: Vector, b: Vector ) {
     const length = a.length()
     b.x = a.x / length
@@ -128,7 +127,6 @@ export class Vector {
 
   static lerp( a: Vector, b: Vector, t: number ) {
     return a.multiply( 1 - t ).add( b.multiply( t ))
-    //return b.subtract( a ).multiply( fraction ).add( a )
   }
 
   static fromArray( a: number[]) {
