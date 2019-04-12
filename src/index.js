@@ -10,7 +10,7 @@
 */
 
 
-export class Vector {
+module.exports = class Vector {
   x: number
   y: number
   z: number
