@@ -6,6 +6,7 @@ import { uglify } from 'rollup-plugin-uglify';
 
 const config = {
   output: {
+    exports: 'named',
     format: 'umd',
     name: 'Vector.js',
   },
