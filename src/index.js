@@ -23,10 +23,7 @@ module.exports = class Vector {
     })
   }
 
-  static negative( a: Vector, b: Vector = new Vector(0,0,0 )) {
-    b.x = -a.x; b.y = -a.y; b.z = -a.z
-    return b
-  }
+  /** Vector operations */
 
   static add( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
     if ( b instanceof Vector ) {
@@ -91,6 +88,29 @@ module.exports = class Vector {
     return c
   }
 
+  // Return a vector comprising of the largest of A and B's components.
+  static max( a: Vector, b: Vector ) {
+    return new Vector(
+      Math.max( a.x, b.x ),
+      Math.max( a.y, b.y ),
+      Math.max( a.z, b.z ),
+    )
+  }
+
+  // Return a vector comprising of the smallest of A and B's components.
+  static min( a: Vector, b: Vector ) {
+    return new Vector(
+      Math.min( a.x, b.x ),
+      Math.min( a.y, b.y ),
+      Math.min( a.z, b.z ),
+    )
+  }
+
+  static negative( a: Vector, b: Vector = new Vector(0,0,0 )) {
+    b.x = -a.x; b.y = -a.y; b.z = -a.z
+    return b
+  }
+
   static unit( a: Vector, b: Vector = new Vector(0,0,0 )) {
     const length = a.length()
     b.x = a.x / length
@@ -99,54 +119,79 @@ module.exports = class Vector {
     return b
   }
 
-  static fromAngles( theta: number, phi: number ) {
-    return new Vector(
-      Math.cos( theta ) * Math.cos( phi ),
-      Math.sin( phi ),
-      Math.sin( theta ) * Math.cos( phi )
-    )
+
+  /** Scalar operations */
+
+  // Calculate the angle between two vectors.
+  static angleBetween( a: Vector, b: Vector ) {
+    return a.angleTo( b )
   }
 
-  static randomDirection() {
-    return Vector.fromAngles(
-      Math.random() * Math.PI * 2,
-      Math.asin( Math.random() * 2 - 1 )
-    )
+  // Calculate the angle needed to point in the direction of another angle.
+  static angleTo( a: Vector, b: Vector ) {
+    return Math.acos( a.dot( b ) / ( a.length() * b.length()))
   }
 
-  static min( a: Vector, b: Vector ) {
-    return new Vector(
-      Math.min( a.x, b.x ),
-      Math.min( a.y, b.y ),
-      Math.min( a.z, b.z )
-    )
+  // Algebraically, the dot product is the sum of the products
+  // of the corresponding entries of two vectors.
+  // Geometrically, it's the product of the Euclidean magnitudes
+  // of two vectors and the cosine of the angle between them.
+  static dot( a: Vector, b: Vector ) {
+    return a.x * b.x + a.y * b.y + a.z * b.z
   }
 
-  static max( a: Vector, b: Vector ) {
-    return new Vector(
-      Math.max( a.x, b.x ), Math.max( a.y, b.y ), Math.max( a.z, b.z ))
-  }
+  //static length = this.magnitude
 
+  // Linearly interpolate between two vectors using the ratio `0 <= t <= 1`
   static lerp( a: Vector, b: Vector, t: number ) {
     return a.multiply( 1 - t ).add( b.multiply( t ))
   }
 
+  // Size / length / Euclidean norm
+  static magnitude( a: Vector, b: Vector = new Vector(0,0,0 )) {
+    return Math.sqrt( a.dot( a ))
+  }
+
+
+  /** Comparisons */
+
+  equals( v: Vector ) {
+    return this.x === v.x && this.y === v.y && this.z === v.z
+  }
+
+
+  /** Constructors */
+
+  // Create vector from a vector array in the form of `[x,y,z]`
   static fromArray( a: number[]) {
     return new Vector( a[0], a[1], a[2])
   }
 
+  // Create vector from a set of spherical coordinate angles.
+  static fromPhiTheta( phi: number, theta: number ) {
+    return new Vector(
+      Math.cos( phi ) * Math.cos( theta ),
+      Math.sin( phi ),
+      Math.cos( phi ) * Math.sin( theta ),
+    )
+  }
+
+  // Create vector from a vector object in the form of `{x,y,z}`
   static fromVector( v: Vector ): Vector {
     /* $FlowFixMe nullish */
     return new Vector( v.x, v.y, v.z ?? 0 )
   }
 
-  static angleBetween( a: Vector, b: Vector ) {
-    return a.angleTo( b )
+  // Returns a vector with a length of 1 and a statistically uniform direction.
+  static randomDirection() {
+    return Vector.fromPhiTheta(
+      Math.asin( Math.random() * 2 - 1 ),
+      Math.random() * Math.PI * 2,
+    )
   }
 
-  negative() {
-    return new Vector( -this.x, -this.y, -this.z )
-  }
+
+  /** Vector operations */
 
   add( v: Vector | number ) {
     if ( v instanceof Vector )
@@ -176,14 +221,6 @@ module.exports = class Vector {
       return new Vector( this.x / v, this.y / v, this.z / v )
   }
 
-  equals( v: Vector ) {
-    return this.x === v.x && this.y === v.y && this.z === v.z
-  }
-
-  dot( v: Vector ) {
-    return this.x * v.x + this.y * v.y + this.z * v.z
-  }
-
   cross( v: Vector ) {
     return new Vector(
       this.y * v.z - this.z * v.y,
@@ -192,37 +229,50 @@ module.exports = class Vector {
     )
   }
 
-  length() {
-    return Math.sqrt( this.dot( this ))
+  negative() {
+    return new Vector( -this.x, -this.y, -this.z )
   }
 
   unit() {
     return this.divide( this.length())
   }
 
-  min() {
-    return Math.min( Math.min( this.x, this.y ), this.z )
-  }
 
-  max() {
-    return Math.max( Math.max( this.x, this.y ), this.z )
-  }
-
-  toAngles() {
-    return {
-      theta: Math.atan2( this.z, this.x ),
-      phi: Math.asin( this.y / this.length())
-    }
-  }
+  /** Scalar operations */
 
   angleTo( a: Vector ) {
     return Math.acos( this.dot( a ) / ( this.length() * a.length()))
   }
 
-  toArray( n: number ): number[] {
-    // Return an array containing n=[0,3] coordinates
-    return [ this.x, this.y, this.z ].slice( 0, n || 3 )
+  dot( v: Vector ) {
+    return this.x * v.x + this.y * v.y + this.z * v.z
   }
+
+  //length = this.magnitude
+
+  magnitude() {
+    return Math.sqrt( this.dot( this ))
+  }
+
+  // Returns largest component
+  max() {
+    return Math.max( Math.max( this.x, this.y ), this.z )
+  }
+
+  // Returns smallest component
+  min() {
+    return Math.min( Math.min( this.x, this.y ), this.z )
+  }
+
+
+  /** Comparisons */
+
+  equals( v: Vector ) {
+    return this.x === v.x && this.y === v.y && this.z === v.z
+  }
+
+
+  /** Constructors */
 
   clone() {
     return new Vector( this.x, this.y, this.z )
@@ -232,6 +282,19 @@ module.exports = class Vector {
     this.x = x; this.y = y; this.z = z
     return this
   }
-}
 
-export default Vector
+  /** Conversion */
+
+  // @see https://en.wikipedia.org/wiki/Spherical_coordinate_system#Coordinate_system_conversions
+  toPhiTheta() {
+    return {
+      phi: Math.asin( this.y / this.length()),
+      theta: Math.atan2( this.z, this.x )
+    }
+  }
+
+  toArray( n: number ): number[] {
+    // Return an array containing n=[0,3] coordinates
+    return [ this.x, this.y, this.z ].slice( 0, n || 3 )
+  }
+}
