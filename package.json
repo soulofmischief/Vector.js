@@ -29,15 +29,18 @@
     "clean": "npx rimraf es dist lib",
     "lint:flow": "npx flow status",
     "lint:flow:stop": "npx flow stop",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "npx babel-node node_modules/.bin/ospec"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-flow": "^7.0.0",
     "flow-bin": "^0.89.0",
+    "ospec": "^3.1.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.68.2",
     "rollup-plugin-babel": "^4.1.0",
