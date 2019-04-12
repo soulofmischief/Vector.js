@@ -16,9 +16,11 @@ export class Vector {
   z: number
 
   constructor( x: number, y: number, z?: number ) {
-    this.x = x || 0
-    this.y = y || 0
-    this.z = z || 0
+    Object.assign( this, {
+      x: x || 0,
+      y: y || 0,
+      z: z || 0
+    })
   }
 
   static negative( a: Vector, b: Vector = new Vector(0,0,0 )) {
