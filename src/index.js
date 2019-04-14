@@ -136,6 +136,9 @@ module.exports = class Vector {
   // of the corresponding entries of two vectors.
   // Geometrically, it's the product of the Euclidean magnitudes
   // of two vectors and the cosine of the angle between them.
+  // It allows us insight into the similarity between the components of
+  // two vectors. The dot product of two normalized vectors is the length
+  // of one vector projected onto the other.
   static dot( a: Vector, b: Vector ) {
     return a.x * b.x + a.y * b.y + a.z * b.z
   }
@@ -179,7 +182,7 @@ module.exports = class Vector {
   // Create vector from a vector object in the form of `{x,y,z}`
   static fromVector( v: Vector ): Vector {
     /* $FlowFixMe nullish */
-    return new Vector( v.x, v.y, v.z ?? 0 )
+    return new Vector( v.x || 0, v.y || 0, v.z || 0 )
   }
 
   // Returns a vector with a length of 1 and a statistically uniform direction.
