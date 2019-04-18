@@ -25,7 +25,7 @@ module.exports = class Vector {
 
   /** Vector operations */
 
-  static add( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
+  static add( a: Vector, b: Vector, c: Vector = new Vector( 0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x + b.x
       c.y = a.y + b.y
@@ -39,7 +39,7 @@ module.exports = class Vector {
     return c
   }
 
-  static subtract( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
+  static subtract( a: Vector, b: Vector, c: Vector = new Vector( 0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x - b.x
       c.y = a.y - b.y
@@ -53,7 +53,7 @@ module.exports = class Vector {
     return c
   }
 
-  static multiply( a: Vector, b: Vector | number, c: Vector = new Vector(0,0,0 )) {
+  static multiply( a: Vector, b: Vector | number, c: Vector = new Vector( 0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x * b.x
       c.y = a.y * b.y
@@ -67,7 +67,7 @@ module.exports = class Vector {
     return c
   }
 
-  static divide( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
+  static divide( a: Vector, b: Vector, c: Vector = new Vector( 0,0,0 )) {
     if ( b instanceof Vector ) {
       c.x = a.x / b.x
       c.y = a.y / b.y
@@ -81,7 +81,7 @@ module.exports = class Vector {
     return c
   }
 
-  static cross( a: Vector, b: Vector, c: Vector = new Vector(0,0,0 )) {
+  static cross( a: Vector, b: Vector, c: Vector = new Vector( 0,0,0 )) {
     c.x = a.y * b.z - a.z * b.y
     c.y = a.z * b.x - a.x * b.z
     c.z = a.x * b.y - a.y * b.x
@@ -106,12 +106,12 @@ module.exports = class Vector {
     )
   }
 
-  static negative( a: Vector, b: Vector = new Vector(0,0,0 )) {
+  static negative( a: Vector, b: Vector = new Vector( 0,0,0 )) {
     b.x = -a.x; b.y = -a.y; b.z = -a.z
     return b
   }
 
-  static unit( a: Vector, b: Vector = new Vector(0,0,0 )) {
+  static unit( a: Vector, b: Vector = new Vector( 0,0,0 )) {
     const length = a.length()
     b.x = a.x / length
     b.y = a.y / length
