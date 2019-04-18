@@ -192,6 +192,4 @@ tags
 [._]*.un~
 
 ## Project files
-/es/
-/dist/
 /lib/
