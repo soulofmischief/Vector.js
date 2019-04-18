@@ -151,7 +151,7 @@ module.exports = class Vector {
   }
 
   // Size / length / Euclidean norm
-  static magnitude( a: Vector, b: Vector = new Vector(0,0,0 )) {
+  static magnitude( a: Vector ) {
     return Math.sqrt( a.dot( a ))
   }
 
