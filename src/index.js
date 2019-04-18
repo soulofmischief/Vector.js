@@ -158,8 +158,8 @@ module.exports = class Vector {
 
   /** Comparisons */
 
-  equals( v: Vector ) {
-    return this.x === v.x && this.y === v.y && this.z === v.z
+  static equals( a: Vector, b: Vector ) {
+    return a.x === b.x && a.y === b.y && a.z === b.z
   }
 
 
