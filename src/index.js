@@ -143,7 +143,7 @@ module.exports = class Vector {
     return a.x * b.x + a.y * b.y + a.z * b.z
   }
 
-  //static length = this.magnitude
+  static length = this.magnitude
 
   // Linearly interpolate between two vectors using the ratio `0 <= t <= 1`
   static lerp( a: Vector, b: Vector, t: number ) {
@@ -251,7 +251,7 @@ module.exports = class Vector {
     return this.x * v.x + this.y * v.y + this.z * v.z
   }
 
-  //length = this.magnitude
+  length = this.magnitude
 
   magnitude() {
     return Math.sqrt( this.dot( this ))
